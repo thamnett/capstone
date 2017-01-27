@@ -41,7 +41,7 @@ svg {
 
 <header>
   <aside>Jan 27, 2017</aside>
-  <a href="../" rel="author">TMH</a>
+  <a>TMH</a>
 </header>
 
 <h1>Stock EPS Surprise</h1>
@@ -70,7 +70,7 @@ var y = d3.scale.linear()
 var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
-    .tickFormat(formatPercent);
+    .tickFormat(format);
     
 var xAxis = d3.svg.axis()
     .scale(x)
@@ -84,13 +84,13 @@ var svg = d3.select("#chart").append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 svg.append("g")
-    .attr("class", "x axis");
+    .attr("class", "y axis");
 
 svg.append("g")
-    .attr("class", "y axis")
+    .attr("class", "x axis")
   .append("line")
     .attr("class", "domain")
-    .attr("y2", height);
+    .attr("x2", width);
 
 var menu = d3.select("#menu select")
     .on("change", change);
@@ -135,7 +135,7 @@ function redraw() {
   var stock1 = menu.property("value"),
       top = result.filter(function(row) {
         return row['Symbol'] == stock1;
-    })
+    });
 
   x.domain(top.map(function(d) { return d.Q; }));
 
