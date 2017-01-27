@@ -102,7 +102,7 @@ d3.csv("data.csv", function(data) {
   .key(function(d) { return d.Symbol;})
   .entries(results);
 
-  results.forEach(function(d) {
+  data.forEach(function(d) {
     d.SurpriseVal = +d.SurpriseVal;
   });
 
