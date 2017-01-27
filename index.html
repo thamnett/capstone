@@ -66,16 +66,19 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+var format = d3.time.format("%d-%m-%y");
+    
 d3.csv("data.csv", function(error, data) {
     data = data.filter(function(row) {
         return row['Symbol'] == 'AAPL';
     })
-
+    
   data.forEach(function(d) {
     d.SurpriseVal = +d.SurpriseVal;
+    d.Date = format.parse(d.Date);
   });
 
-  x.domain(data.map(function(d) { return d.Quarter; }));
+  x..domain(d3.extent(data,function(d) { return d.date; }));
   y.domain([0, d3.max(data, function(d) { return d.SurpriseVal; })]);
 
   svg.append("g")
