@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<title>Stock EPS Surprise</title>
 <style>
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   position: relative;
+  width: 1440px;
 }
 .axis text {
   font: 10px sans-serif;
@@ -44,79 +44,30 @@ label {
   top: 10px;
   right: 10px;
 }
-#chart {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  position: relative;
-  width: 1440px;
-}
 </style>
-
-<header>
-  <aside>Jan 27, 2017</aside>
-  <a>TMH</a>
-</header>
-
-<h1>Stock EPS Surprise</h1>
-
-<p id="chart">
-
-<p id="menu"><b>S&P500 Stocks</b><br>Stock: <select></select>
-
 <label><input type="checkbox"> Sort values</label>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 var margin = {top: 20, right: 20, bottom: 100, left: 40},
     width = 1440 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
-    
-var formateps = d3.format(".2f");
-    
+var formatPercent = d3.format(".2f");
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1, 1);
-    
 var y = d3.scale.linear()
     .range([height, 0]);
-    
 var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom");
-    
 var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
-    .tickFormat(formateps);
+    .tickFormat(formatPercent);
     
-var div = d3.select("#chart").append("div")   
+var div = d3.select("body").append("div")   
     .attr("class", "tooltip")               
     .style("opacity", 0);
-
-var stocks;
-d3.csv("stocks.csv", function(stocks) {
-  var ISO3 = {};
-  stocks.forEach(function(d) {
-    ISO3[d.Symbol] = d[Symbol];
-  });
-  generateStockList(ISO3);
-});
-
-//create dropdown of countries
-var menu = d3.select("#menu select")
-    .on("change", load);
-
-function generateStockList(stocks) {
-  for (var stock in stocks) {
-    var option=menu.append("option");
-      option.text(stock)
-      .attr("value", stocks[stock]);
-    
-    //set starting country
-    if (stock=="AAPL") option.attr("selected",true);
-
-  }
-  load();
-}
-
-var svg = d3.select("#chart").append("svg")
+var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -212,16 +163,5 @@ d3.csv("data.csv", function(error, data) {
        .attr("dy", ".15em")
        .attr("transform", "rotate(-65)" );
   }
-var altKey;
-d3.select(window)
-    .on("keydown", function() { altKey = d3.event.altKey; })
-    .on("keyup", function() { altKey = false; });
-
-function load() {
-  clearTimeout(timeout);
-
-  d3.transition()
-      .duration(altKey ? 7500 : 750)
-      .each(redraw);
-}
+});
 </script>
