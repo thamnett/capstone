@@ -49,7 +49,7 @@ var margin = {top: 20, right: 20, bottom: 100, left: 40},
 var formatPercent = d3.format(".0%");
 
 var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width]);
+    .rangeRoundBands([0, width], .1, 1);
 
 var y = d3.scale.linear()
     .range([height, 0]);
@@ -143,7 +143,12 @@ d3.csv("data.csv", function(error, data) {
     transition.select(".x.axis")
         .call(xAxis)
       .selectAll("g")
-        .delay(delay);
+        .delay(delay)
+      .selectAll("text")
+       .style("text-anchor", "end")
+       .attr("dx", "-.8em")
+       .attr("dy", ".15em")
+       .attr("transform", "rotate(-65)" );
   }
 });
 
