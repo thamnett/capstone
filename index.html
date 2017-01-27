@@ -84,7 +84,9 @@ d3.csv("data.csv", function(error, data) {
     svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+      .call(xAxis)
+      .selectAll("text")
+      .attr("transform", "rotate(-90)");
 
   svg.append("g")
       .attr("class", "y axis")
