@@ -104,10 +104,10 @@ d3.csv("data.csv", function(error, data) {
       //.attr("class", "bar")
       .attr("x", function(d) { return x(d.Q); })
       .attr("width", x.rangeBand())
-      //.attr("y", function(d) { return x(Math.min(0, d.SurpriseVal)); })
-      .attr("y", function(d) { return y(d.SurpriseVal); })
-       //.attr("height", function(d) { return Math.abs(y(d.SurpriseVal) - y(0)); })
-      .attr("height", function(d) { return height - y(d.SurpriseVal); });
+      .attr("y", function(d) { return y(Math.max(0, d.SurpriseVal)); })
+      //.attr("y", function(d) { return y(d.SurpriseVal); })
+      .attr("height", function(d) { return Math.abs(y(d.SurpriseVal) - y(0)); })
+      //.attr("height", function(d) { return height - y(d.SurpriseVal); });
 
   d3.select("input").on("change", change);
 
