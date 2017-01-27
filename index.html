@@ -1,78 +1,65 @@
 <!DOCTYPE html>
+<html>
 <meta charset="utf-8">
+<title>Stock EPS Surprise</title>
 <style>
 
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  position: relative;
-  width: 1440px;
-}
-
-.axis text {
+svg {
   font: 10px sans-serif;
 }
 
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.bar--positive {
+.bar rect {
   fill: steelblue;
 }
 
-.bar--negative {
-  fill: darkorange;
+.bar:hover rect {
+  fill: brown;
 }
-.x.axis path {
-  display: none;
+
+.value {
+  fill: white;
 }
-.mytitle text {
-  font: 18px georgia;
-  padding: 10px;
-  text-align: left;
+
+.axis {
+  shape-rendering: crispEdges;
 }
-div.tooltip {   
-position: absolute;     
-text-align: center;
-vertical-align: middle;   
-width: 150px;                  
-height: 50px;                 
-padding: 5px; 
-color: #000000;          
-font-size: 12px;     
-background: #FFF;
-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-border: 2px;  
-border-radius: 8px;  
-pointer-events: none;                  
+
+.axis path {
+  stroke: none;
 }
-label {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+
+.x.axis line {
+  stroke: #fff;
+  stroke-opacity: .8;
+}
+
+.y.axis path {
+  stroke: black;
 }
 
 </style>
-<div class="mytitle">
-    <h1><b>Stock EPS Surprise History</b></h1>
-</div>
-<div id="chart">
-</div>
-<div id="filt">
-    <b>Stocks:</b>
-</div>
-<label><input type="checkbox"> Sort values</label>
-<script src="//d3js.org/d3.v3.min.js"></script>
+
+<header>
+  <aside>Jan 27, 2017</aside>
+  <a href="../" rel="author">TMH/a>
+</header>
+
+<h1>Stock EPS Surprise</h1>
+
+<p id="chart">
+
+<p id="menu"><b>S&P500 Stocks</b><br>Stock: <select></select>
+
+<script src="//d3js.org/d3.v2.min.js" charset="utf-8"></script>
 <script>
 
-var margin = {top: 20, right: 20, bottom: 100, left: 40},
-    width = 1440 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+var margin = {top: 20, right: 40, bottom: 10, left: 40},
+    width = 960,
+    height = 250 - margin.top - margin.bottom;
 
-var formatPercent = d3.format(".2f");
+var format = d3.format(".2f");
+//    states,
+//    age;
 
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1, 1);
@@ -80,155 +67,137 @@ var x = d3.scale.ordinal()
 var y = d3.scale.linear()
     .range([height, 0]);
 
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
-
 var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
     .tickFormat(formatPercent);
-
-var splst = ['AGN', 'LIFE', 'EOG', 'CPB', 'YUM', 'JWN', 'TAP', 'BWA', 'WM', 'SPG', 'FIS', 'GT', 'GIS', 'MJN', 'ROP', 'GE', 'GD', 'VAR', 'AMZN', 'MAS', 'MAR', 'MAT', 'SNA', 'SNI', 'XRAY', 'JNJ', 'XYL', 'TSN', 'SYMC', 'BEN', 'CMI', 'DISCA', 'CMG', 'CME', 'CMA', 'CMS', 'DTV', 'VLO', 'HUM', 'APOL', 'LSI', 'PCLN', 'FSLR', 'HCP', 'IGT', 'K', 'FFIV', 'BLL', 'ORLY', 'BLK', 'FTI', 'HCN', 'NFX', 'MA', 'CBG', 'PRGO', 'MO', 'NOC', 'MU', 'CBS', 'NDAQ', 'SE', 'MS', 'TJX', 'NOV', 'AMGN', 'COST', 'FE', 'CTL', 'ADBE', 'DOV', 'DOW', 'MSFT', 'GLW', 'SCHW', 'BSX', 'FCX', 'UPS', 'WHR', 'BBBY', 'MDT', 'F', 'DFS', 'JEC', 'V', 'FMC', 'AVY', 'ALL', 'NTAP', 'LMT', 'MMM', 'SO', 'JNPR', 'MMC', 'WEC', 'DPS', 'IBM', 'BAX', 'CAT', 'CAH', 'BAC', 'GS', 'CAG', 'LM', 'LH', 'PGR', 'HIG', 'CELG', 'A', 'ABC', 'ZION', 'STI', 'STT', 'ABT', 'XOM', 'STX', 'STZ', 'BHI', 'CERN', 'RSG', 'PNW', 'IVZ', 'PNC', 'BXP', 'VFC', 'XLNX', 'JOY', 'RAI', 'PRU', 'RF', 'RL', 'URBN', 'CHK', 'L', 'HRS', 'HRL', 'MRO', 'MRK', 'HRB', 'IPG', 'RHT', 'RHI', 'APH', 'ROST', 'APC', 'APA', 'APD', 'SRE', 'KSS', 'WFM', 'WFC', 'IFF', 'NVDA', 'RTN', 'BMS', 'BMY', 'AFL', 'EL', 'PAYX', 'OXY', 'SHW', 'ED', 'EA', 'CSC', 'CSX', 'TMK', 'EW', 'LUV', 'MUR', 'ATI', 'WYN', 'JBL', 'ADSK', 'WPX', 'ECL', 'SEE', 'PVH', 'DGX', 'NUE', 'EXPE', 'EXPD', 'UNP', 'ETFC', 'DUK', 'CLF', 'R', 'CLX', 'DTE', 'BBY', 'UNH', 'BBT', 'TRIP', 'OMC', 'KO', 'VMC', 'KR', 'LNC', 'KEY', 'ITW', 'KLAC', 'DO', 'SWK', 'WYNN', 'SWN', 'DF', 'DG', 'DD', 'DE', 'TGT', 'HBAN', 'BIIB', 'PCG', 'AKAM', 'DHI', 'M', 'INTU', 'SLM', 'ALXN', 'DHR', 'SLB', 'MCO', 'MCK', 'MCD', 'NRG', 'PBCT', 'VTR', 'AXP', 'NFLX', 'EXC', 'AAPL', 'SJM', 'SRCL', 'WU', 'WY', 'VNO', 'UNM', 'SPLS', 'HST', 'HSY', 'CTSH', 'HAL', 'FITB', 'EQR', 'EQT', 'GPC', 'X', 'HAR', 'HAS', 'THC', 'CTXS', 'GPS', 'PHM', 'SYK', 'KIM', 'SYY', 'AEP', 'AES', 'AET', 'EMN', 'ESRX', 'AMAT', 'FTR', 'AEE', 'CTAS', 'EMR', 'FDX', 'CRM', 'TSO', 'PX', 'PG', 'PH', 'PM', 'EFX', 'C', 'S', 'QCOM', 'XRX', 'ANF', 'MOS', 'PSA', 'PSX', 'MON', 'MCHP', 'ETR', 'COP', 'DVN', 'KMB', 'DVA', 'KMI', 'GWW', 'FISV', 'COG', 'COF', 'COH', 'PEG', 'ETN', 'COL', 'BCR', 'KMX', 'DLTR', 'QEP', 'CI', 'HES', 'CB', 'CA', 'CF', 'WAT', 'CHRW', 'TDC', 'SBUX', 'PLD', 'CMCSA', 'FHN', 'MKC', 'GNW', 'CVX', 'AIZ', 'EIX', 'AIV', 'CVS', 'LOW', 'MSI', 'AIG', 'DIS', 'PPG', 'MNST', 'NSC', 'PPL', 'OKE', 'JCP', 'IP', 'HPQ', 'IR', 'MTB', 'UTX', 'JCI', 'PWR', 'CSCO', 'WDC', 'BA', 'BK', 'DRI', 'CCL', 'TIF', 'FLIR', 'MYL', 'LYB', 'D', 'PEP', 'WMT', 'VZ', 'T', 'WMB', 'VRSN', 'OI', 'CINF', 'NTRS', 'FLS', 'FLR', 'HD', 'LLY', 'ROK', 'INTC', 'SCG', 'AMD', 'NWL', 'AMP', 'TMO', 'AMT', 'LRCX', 'CNX', 'YHOO', 'PBI', 'BDX', 'TRV', 'MPC', 'AVP', 'MDLZ', 'AVB', 'NEM', 'FOSL', 'NEE', 'NI', 'NBR', 'RRC', 'FAST', 'NBL', 'TER', 'HP', 'LLTC', 'ADP', 'DNB', 'GILD', 'GME', 'RDC', 'DNR', 'JPM', 'ADM', 'ADI', 'VIAB', 'LEG', 'XEL', 'WIN', 'LEN', 'EBAY', 'MET', 'USB', 'AZO', 'PDCO', 'TWX', 'PCAR', 'TXN', 'CL', 'ORCL', 'TXT', 'PXD', 'HOG', 'PKI', 'CNP', 'HON', 'ICE', 'AN', 'ABBV', 'TROW', 'ISRG', 'PFE', 'NKE', 'PFG', 'TSS'];
-
-var select = d3.select('#filt')
-  .append('select')
-  attr('class','select')
-  .on('change',onchange);
-
-var options = select
-  .selectAll('option')
-  .data(splst).enter()
-  .append('option')
-  .text(function (d) { return d; });
-
-function onchange() {
-   selectValue = d3.select('select').property('value')
-   d3.select('body')
-   .append('p')
-   .text(selectValue + ' is the last selected option.')
-};
     
-//var dropDown = d3.select("#filt").append("select")
- //                   .attr("name", splst);
-    
-var div = d3.select("body").append("div")   
-    .attr("class", "tooltip")               
-    .style("opacity", 0);
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
 
 var svg = d3.select("#chart").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+    .style("margin-left", -margin.left + "px")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-//dropDown.on("change", function() {
-//      var selected = this.value;
-    
-d3.csv("data.csv", function(error, data) {
-    data = data.filter(function(row) {
-        return row['Symbol'] == 'AAPL';
-    })
-    
-  data.forEach(function(d) {
+svg.append("g")
+    .attr("class", "x axis");
+
+svg.append("g")
+    .attr("class", "y axis")
+  .append("line")
+    .attr("class", "domain")
+    .attr("y2", height);
+
+var menu = d3.select("#menu select")
+    .on("change", change);
+
+d3.csv("data.csv", function(data) {
+  results = data;
+
+  var stocks = d3.keys(results[0]).filter(function(key) {
+    return key != "Symbol";
+  });
+
+  results.forEach(function(d) {
     d.SurpriseVal = +d.SurpriseVal;
   });
 
-  x.domain(data.map(function(d) { return d.Q; }));
-  y.domain([d3.min(data, function(d) { return d.SurpriseVal; }), d3.max(data, function(d) { return d.SurpriseVal; })]);
-    
-    svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis)
-     .selectAll("text")
-      .style("text-anchor", "end")
-      .attr("dx", "-.8em")
-      .attr("dy", ".15em")
-      .attr("transform", "rotate(-65)" );
 
-  svg.append("g")
-      .attr("class", "y axis")
-      //.attr("transform", "translate(0," + x(0) + ")")
-      .call(yAxis)
-    .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("EPS Surprise");
+  menu.selectAll("option")
+      .data(stocks)
+    .enter().append("option")
+      .text(function(d) { return d; });
 
-  svg.selectAll(".bar")
-      .data(data)
-    .enter().append("rect")
-      .attr("class", function(d) { return "bar bar--" + (d.SurpriseVal < 0 ? "negative" : "positive"); })
-      //.attr("class", "bar")
-      .attr("x", function(d) { return x(d.Q); })
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(Math.max(0, d.SurpriseVal)); })
-      //.attr("y", function(d) { return y(d.SurpriseVal); })
-      .attr("height", function(d) { return Math.abs(y(d.SurpriseVal) - y(0)); })
-      //.attr("height", function(d) { return height - y(d.SurpriseVal); });
-        .on('mouseover', function(d){
-           d3.select(this)
-             .style("opacity", 0.2)
-             .style("stroke", "black")
- 
-           var info = div
-              .style("opacity", 1)
-              .style("left", (d3.event.pageX+10) + "px")
-              .style("top", (d3.event.pageY-30) + "px")
-              .text(d.Q);
+  menu.property("value", "AAPL");
 
-              info.append("p")
-              .text(formatPercent(d.SurpriseVal));
-
-          })
-         .on('mouseout', function(d){
-            d3.select(this)
-          .style({'stroke-opacity':0.5,'stroke':'#a8a8a8'})
-          .style("opacity",1);
-
-          div
-              .style("opacity", 0);
-          });
-
-  d3.select("input").on("change", change);
-
-  var sortTimeout = setTimeout(function() {
-    d3.select("input").property("checked", true).each(change);
-  }, 2000);
-
-  function change() {
-    clearTimeout(sortTimeout);
-
-    // Copy-on-write since tweens are evaluated after a delay.
-    var x0 = x.domain(data.sort(this.checked
-        ? function(a, b) { return b.SurpriseVal - a.SurpriseVal; }
-        : function(a, b) { return d3.ascending(a.Q, b.Q); })
-        .map(function(d) { return d.Q; }))
-        .copy();
-
-    svg.selectAll(".bar")
-        .sort(function(a, b) { return x0(a.Q) - x0(b.Q); });
-
-    var transition = svg.transition().duration(750),
-        delay = function(d, i) { return i * 50; };
-
-    transition.selectAll(".bar")
-        .delay(delay)
-        .attr("x", function(d) { return x0(d.Q); });
-
-    transition.select(".x.axis")
-        .call(xAxis)
-      .selectAll("g")
-        .delay(delay)
-      .selectAll("text")
-       .style("text-anchor", "end")
-       .attr("dx", "-.8em")
-       .attr("dy", ".15em")
-       .attr("transform", "rotate(-65)" );
-  }
+  redraw();
 });
+
+var altKey;
+
+d3.select(window)
+    .on("keydown", function() { altKey = d3.event.altKey; })
+    .on("keyup", function() { altKey = false; });
+
+function change() {
+  clearTimeout(timeout);
+
+  d3.transition()
+      .duration(altKey ? 7500 : 750)
+      .each(redraw);
+}
+
+function redraw() {
+  var stock1 = menu.property("value"),
+      top = result.filter(function(row) {
+        return row['Symbol'] == stock1;
+    })
+
+  x.domain(top.map(function(d) { return d.Q; }));
+
+  var bar = svg.selectAll(".bar")
+      .data(top, function(d) { return d.Q; });
+
+  var barEnter = bar.enter().insert("g", ".axis")
+      .attr("class", "bar")
+      .attr("transform", function(d) { return "translate(0," + (x(d.Q) + width) + ")"; })
+      .style("fill-opacity", 0);
+
+  barEnter.append("rect")
+      .attr("width", x.rangeBand())
+      .attr("height", function(d) { return y(d.SurpriseVal); });
+
+  barEnter.append("text")
+      .attr("class", "label")
+      .attr("y", 0)
+      .attr("x", x.rangeBand() / 2)
+      .attr("dx", ".35em")
+      .attr("text-anchor", "end")
+      .text(function(d) { return d.State; });
+
+  barEnter.append("text")
+      .attr("class", "value")
+      .attr("y", age && function(d) { return y(d.SurpriseVal); })
+      .attr("x", x.rangeBand() / 2)
+      .attr("dx", ".35em")
+      .attr("text-anchor", "end");
+
+  y.domain([d3.min(data, function(d) { return d.SurpriseVal; }), d3.max(data, function(d) { return d.SurpriseVal; })]);
+
+  var barUpdate = d3.transition(bar)
+      .attr("transform", function(d) { return "translate(0," + (d.x0 = x(d.Q)) + ")"; })
+      .style("fill-opacity", 1);
+
+  barUpdate.select("rect")
+      .attr("height", function(d) { return y(d.SurpriseVal); });
+
+  barUpdate.select(".value")
+      .attr("y", function(d) { return y(d.SurpriseVal); })
+      .text(function(d) { return format(d.SurpriseVal); });
+
+  var barExit = d3.transition(bar.exit())
+      .attr("transform", function(d) { return "translate(0," + (d.x0 + width) + ")"; })
+      .style("fill-opacity", 0)
+      .remove();
+
+  barExit.select("rect")
+      .attr("height", function(d) { return y(d.SurpriseVal); });
+
+  barExit.select(".value")
+      .attr("y", function(d) { return y(d.SurpriseVal); })
+      .text(function(d) { return format(d.SurpriseVal); });
+
+  d3.transition(svg).select(".y.axis")
+      .call(yAxis);
+}
+
+var timeout = setTimeout(function() {
+  menu.property("value", "AAPL").node().focus();
+  change();
+}, 5000);
 
 </script>

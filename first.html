@@ -91,7 +91,28 @@ var yAxis = d3.svg.axis()
 
 var splst = ['AGN', 'LIFE', 'EOG', 'CPB', 'YUM', 'JWN', 'TAP', 'BWA', 'WM', 'SPG', 'FIS', 'GT', 'GIS', 'MJN', 'ROP', 'GE', 'GD', 'VAR', 'AMZN', 'MAS', 'MAR', 'MAT', 'SNA', 'SNI', 'XRAY', 'JNJ', 'XYL', 'TSN', 'SYMC', 'BEN', 'CMI', 'DISCA', 'CMG', 'CME', 'CMA', 'CMS', 'DTV', 'VLO', 'HUM', 'APOL', 'LSI', 'PCLN', 'FSLR', 'HCP', 'IGT', 'K', 'FFIV', 'BLL', 'ORLY', 'BLK', 'FTI', 'HCN', 'NFX', 'MA', 'CBG', 'PRGO', 'MO', 'NOC', 'MU', 'CBS', 'NDAQ', 'SE', 'MS', 'TJX', 'NOV', 'AMGN', 'COST', 'FE', 'CTL', 'ADBE', 'DOV', 'DOW', 'MSFT', 'GLW', 'SCHW', 'BSX', 'FCX', 'UPS', 'WHR', 'BBBY', 'MDT', 'F', 'DFS', 'JEC', 'V', 'FMC', 'AVY', 'ALL', 'NTAP', 'LMT', 'MMM', 'SO', 'JNPR', 'MMC', 'WEC', 'DPS', 'IBM', 'BAX', 'CAT', 'CAH', 'BAC', 'GS', 'CAG', 'LM', 'LH', 'PGR', 'HIG', 'CELG', 'A', 'ABC', 'ZION', 'STI', 'STT', 'ABT', 'XOM', 'STX', 'STZ', 'BHI', 'CERN', 'RSG', 'PNW', 'IVZ', 'PNC', 'BXP', 'VFC', 'XLNX', 'JOY', 'RAI', 'PRU', 'RF', 'RL', 'URBN', 'CHK', 'L', 'HRS', 'HRL', 'MRO', 'MRK', 'HRB', 'IPG', 'RHT', 'RHI', 'APH', 'ROST', 'APC', 'APA', 'APD', 'SRE', 'KSS', 'WFM', 'WFC', 'IFF', 'NVDA', 'RTN', 'BMS', 'BMY', 'AFL', 'EL', 'PAYX', 'OXY', 'SHW', 'ED', 'EA', 'CSC', 'CSX', 'TMK', 'EW', 'LUV', 'MUR', 'ATI', 'WYN', 'JBL', 'ADSK', 'WPX', 'ECL', 'SEE', 'PVH', 'DGX', 'NUE', 'EXPE', 'EXPD', 'UNP', 'ETFC', 'DUK', 'CLF', 'R', 'CLX', 'DTE', 'BBY', 'UNH', 'BBT', 'TRIP', 'OMC', 'KO', 'VMC', 'KR', 'LNC', 'KEY', 'ITW', 'KLAC', 'DO', 'SWK', 'WYNN', 'SWN', 'DF', 'DG', 'DD', 'DE', 'TGT', 'HBAN', 'BIIB', 'PCG', 'AKAM', 'DHI', 'M', 'INTU', 'SLM', 'ALXN', 'DHR', 'SLB', 'MCO', 'MCK', 'MCD', 'NRG', 'PBCT', 'VTR', 'AXP', 'NFLX', 'EXC', 'AAPL', 'SJM', 'SRCL', 'WU', 'WY', 'VNO', 'UNM', 'SPLS', 'HST', 'HSY', 'CTSH', 'HAL', 'FITB', 'EQR', 'EQT', 'GPC', 'X', 'HAR', 'HAS', 'THC', 'CTXS', 'GPS', 'PHM', 'SYK', 'KIM', 'SYY', 'AEP', 'AES', 'AET', 'EMN', 'ESRX', 'AMAT', 'FTR', 'AEE', 'CTAS', 'EMR', 'FDX', 'CRM', 'TSO', 'PX', 'PG', 'PH', 'PM', 'EFX', 'C', 'S', 'QCOM', 'XRX', 'ANF', 'MOS', 'PSA', 'PSX', 'MON', 'MCHP', 'ETR', 'COP', 'DVN', 'KMB', 'DVA', 'KMI', 'GWW', 'FISV', 'COG', 'COF', 'COH', 'PEG', 'ETN', 'COL', 'BCR', 'KMX', 'DLTR', 'QEP', 'CI', 'HES', 'CB', 'CA', 'CF', 'WAT', 'CHRW', 'TDC', 'SBUX', 'PLD', 'CMCSA', 'FHN', 'MKC', 'GNW', 'CVX', 'AIZ', 'EIX', 'AIV', 'CVS', 'LOW', 'MSI', 'AIG', 'DIS', 'PPG', 'MNST', 'NSC', 'PPL', 'OKE', 'JCP', 'IP', 'HPQ', 'IR', 'MTB', 'UTX', 'JCI', 'PWR', 'CSCO', 'WDC', 'BA', 'BK', 'DRI', 'CCL', 'TIF', 'FLIR', 'MYL', 'LYB', 'D', 'PEP', 'WMT', 'VZ', 'T', 'WMB', 'VRSN', 'OI', 'CINF', 'NTRS', 'FLS', 'FLR', 'HD', 'LLY', 'ROK', 'INTC', 'SCG', 'AMD', 'NWL', 'AMP', 'TMO', 'AMT', 'LRCX', 'CNX', 'YHOO', 'PBI', 'BDX', 'TRV', 'MPC', 'AVP', 'MDLZ', 'AVB', 'NEM', 'FOSL', 'NEE', 'NI', 'NBR', 'RRC', 'FAST', 'NBL', 'TER', 'HP', 'LLTC', 'ADP', 'DNB', 'GILD', 'GME', 'RDC', 'DNR', 'JPM', 'ADM', 'ADI', 'VIAB', 'LEG', 'XEL', 'WIN', 'LEN', 'EBAY', 'MET', 'USB', 'AZO', 'PDCO', 'TWX', 'PCAR', 'TXN', 'CL', 'ORCL', 'TXT', 'PXD', 'HOG', 'PKI', 'CNP', 'HON', 'ICE', 'AN', 'ABBV', 'TROW', 'ISRG', 'PFE', 'NKE', 'PFG', 'TSS'];
 
-var div = d3.select("#chart").append("div")   
+var select = d3.select('#filt')
+  .append('select')
+  attr('class','select')
+  .on('change',onchange);
+
+var options = select
+  .selectAll('option')
+  .data(splst).enter()
+  .append('option')
+  .text(function (d) { return d; });
+
+function onchange() {
+   selectValue = d3.select('select').property('value')
+   d3.select('body')
+   .append('p')
+   .text(selectValue + ' is the last selected option.')
+};
+    
+//var dropDown = d3.select("#filt").append("select")
+ //                   .attr("name", splst);
+    
+var div = d3.select("body").append("div")   
     .attr("class", "tooltip")               
     .style("opacity", 0);
 
@@ -104,60 +125,16 @@ var svg = d3.select("#chart").append("svg")
 //dropDown.on("change", function() {
 //      var selected = this.value;
     
-d3.csv("data.csv", type, function(error, states) {
-  if (error) throw error;
-  var stateById = d3.map();
-  states.forEach(function(d) { 
-      stateById.set(d.Symbol, d);
-      d.SurpriseVal = +d.SurpriseVal;
-  });
-  dispatch.call("load", this, stateById);
-  dispatch.call("statechange", this, stateById.get("AAPL"));
-});
-
-// A drop-down menu for selecting a state; uses the "menu" namespace.
-dispatch.on("load.menu", function(stateById) {
-  var select = d3.select("#filt")
-    .append("div")
-    .append("select")
-      .on("change", function() { dispatch.call("statechange", this, stateById.get(this.value)); });
-
-  select.selectAll("option")
-      .data(stateById.values())
-    .enter().append("option")
-      .attr("value", function(d) { return d.Symbol; })
-      .text(function(d) { return d.Symbol; });
+d3.csv("data.csv", function(error, data) {
+    data = data.filter(function(row) {
+        return row['Symbol'] == 'AAPL';
+    })
     
-  dispatch.on("statechange.menu", function(state) {
-    select.property("value", state.Symbol);
+  data.forEach(function(d) {
+    d.SurpriseVal = +d.SurpriseVal;
   });
-});
 
-    
-// A bar chart to show total population; uses the "bar" namespace.
-dispatch.on("load.bar", function(stateById) {
-  var margin = {top: 20, right: 20, bottom: 100, left: 40},
-    width = 1440 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
-
-  var formatPercent = d3.format(".2f");
-  
-  var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .1, 1);
-
-  var y = d3.scale.linear()
-    .range([height, 0]);
-
-  var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
-
-  var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left")
-    .tickFormat(formatPercent);
-  
-    x.domain(data.map(function(d) { return d.Q; }));
+  x.domain(data.map(function(d) { return d.Q; }));
   y.domain([d3.min(data, function(d) { return d.SurpriseVal; }), d3.max(data, function(d) { return d.SurpriseVal; })]);
     
     svg.append("g")
@@ -169,45 +146,6 @@ dispatch.on("load.bar", function(stateById) {
       .attr("dx", "-.8em")
       .attr("dy", ".15em")
       .attr("transform", "rotate(-65)" );
-    
-    svg.append("g")
-      .attr("class", "y axis")
-      //.attr("transform", "translate(0," + x(0) + ")")
-      .call(yAxis)
-    .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("EPS Surprise");
-
-  var rect = svg.append("rect")
-      .attr("x", 4)
-      .attr("width", width - 4)
-      .attr("y", height)
-      .attr("height", 0)
-      .style("fill", "#aaa");
-
-  dispatch.on("statechange.bar", function(d) {
-    rect.transition()
-        svg.selectAll(".bar")
-        .data(data)
-        .enter().append("rect")
-        .attr("class", function(d) { return "bar bar--" + (d.SurpriseVal < 0 ? "negative" : "positive"); })
-        .attr("x", function(d) { return x(d.Q); })
-        .attr("width", x.rangeBand())
-        .attr("y", function(d) { return y(Math.max(0, d.SurpriseVal)); })
-      //.attr("y", function(d) { return y(d.SurpriseVal); })
-        .attr("height", function(d) { return Math.abs(y(d.SurpriseVal) - y(0)); })
-      //.attr("height", function(d) { return height - y(d.SurpriseVal); });
-        .on('mouseover', function(d){
-           d3.select(this)
-             .style("opacity", 0.2)
-             .style("stroke", "black")
-        .attr("y", y(d.total))
-        .attr("height", y(0) - y(d.total));
-  });
-});    
 
   svg.append("g")
       .attr("class", "y axis")
