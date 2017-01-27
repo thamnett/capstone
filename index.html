@@ -94,7 +94,7 @@ var splst = ['AGN', 'LIFE', 'EOG', 'CPB', 'YUM', 'JWN', 'TAP', 'BWA', 'WM', 'SPG
 var select = d3.select('#filt')
   .append('select')
   attr('class','select')
-  .on('change',onchange)
+  .on('change',onchange);
 
 var options = select
   .selectAll('option')
