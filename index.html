@@ -109,7 +109,7 @@ var menu = d3.select("#menu select")
 
 function generateStockList(stocks) {
   for (var stock in stocks) {
-    var option=stockSel.append("option");
+    var option=menu.append("option");
       option.text(stock)
       .attr("value", stocks[stock]);
     
