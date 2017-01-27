@@ -100,6 +100,7 @@ d3.csv("data.csv", function(data) {
 
   var n_data = d3.nest()
   .key(function(d) { return d.Symbol;})
+  .entries(results);
 
   results.forEach(function(d) {
     d.SurpriseVal = +d.SurpriseVal;
