@@ -46,6 +46,7 @@ label {
 }
 </style>
 <label><input type="checkbox"> Sort values</label>
+<p id="menu"><b>S&P500 Stocks</b><br>Stock: <select></select>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 var margin = {top: 20, right: 20, bottom: 100, left: 40},
@@ -63,6 +64,32 @@ var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
     .tickFormat(formatPercent);
+
+var stocks;
+d3.csv("stocks.csv", function(stocks) {
+  var ISO3 = {};
+  stocks.forEach(function(d) {
+    ISO3[d.Symbol] = d[Symbol];
+  });
+  generateStockList(ISO3);
+});
+
+//create dropdown of countries
+var menu = d3.select("#menu select")
+    .on("change", change);
+
+function generateStockList(stocks) {
+  for (var stock in stocks) {
+    var option=menu.append("option");
+      option.text(stock)
+      .attr("value", stocks[stock]);
+    
+    //set starting country
+    if (stock=="AAPL") option.attr("selected",true);
+
+  }
+  //change();
+}
     
 var div = d3.select("body").append("div")   
     .attr("class", "tooltip")               
