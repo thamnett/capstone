@@ -81,7 +81,7 @@ d3.csv("data.csv", function(error, data) {
   });
 
   x.domain(data.map(function(d) { return d.Q; }));
-  y..domain(d3.extent(data, function(d){return d.SurpriseVal;}));
+  y.domain([d3.min(data, function(d) { return d.SurpriseVal; })]), d3.max(data, function(d) { return d.SurpriseVal; })]);
 
   svg.append("g")
       .attr("class", "y axis")
