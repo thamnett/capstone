@@ -9,7 +9,7 @@ body {
 }
 
 .axis text {
-  font: 2px sans-serif;
+  font: 10px sans-serif;
 }
 
 .axis path,
@@ -49,7 +49,7 @@ var margin = {top: 20, right: 20, bottom: 100, left: 40},
 var formatPercent = d3.format(".0%");
 
 var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .1, 1);
+    .rangeRoundBands([0, width]);
 
 var y = d3.scale.linear()
     .range([height, 0]);
