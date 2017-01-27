@@ -95,9 +95,9 @@ svg.append("g")
     .attr("x2", width);
 
 var stocks;
-d3.csv("stocks.csv", function(countries) {
+d3.csv("stocks.csv", function(stocks) {
   var ISO3 = {};
-  countries.forEach(function(d) {
+  stocks.forEach(function(d) {
     ISO3[d.Symbol] = d[Symbol];
   });
   generateStockList(ISO3);
@@ -114,20 +114,31 @@ function generateStockList(stocks) {
       .attr("value", stocks[stock]);
     
     //set starting country
-    if (country=="A") option.attr("selected",true);
+    if (stock=="AAPL") option.attr("selected",true);
 
   }
   change();
 }
-   
+    
+//function generateStockList(splst) {
+ // for (var stk in splst) {
+  //  var option=menu.append("option");
+   //   option.text(stk)
+    //  .attr("value", splst[stk]);
+    
+    //set starting country
+    //if (stk=="AAPL") option.attr("selected",true);
+
+  //}
+  //load();
+//}    
+    
 d3.csv("data.csv", function(data) {
   results = data;
 
-  var n_data = d3.nest()
-  .key(function(d) { return d.Symbol;})
   //.entries(results);
 
-  data.forEach(function(d) {
+  results.forEach(function(d) {
     d.SurpriseVal = +d.SurpriseVal;
   });
 
