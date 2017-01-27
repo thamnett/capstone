@@ -82,7 +82,7 @@ d3.csv("stocks.csv", function(stocks) {
 
 //create dropdown of countries
 var menu = d3.select("#menu select")
-    .on("change", change);
+    .on("change", load);
 
 function generateStockList(stocks) {
   for (var stock in stocks) {
@@ -94,7 +94,7 @@ function generateStockList(stocks) {
     if (stock=="AAPL") option.attr("selected",true);
 
   }
-  change();
+  load();
 }
     
 var div = d3.select("body").append("div")   
@@ -197,5 +197,7 @@ d3.csv("data.csv", function(error, data) {
        .attr("transform", "rotate(-65)" );
   }
 });
+function load() {
+}
 </script>
 </body>
