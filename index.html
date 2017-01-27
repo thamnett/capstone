@@ -68,8 +68,6 @@ var svg = d3.select("body").append("svg")
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-var format = d3.time.format("%d-%m-%y");
     
 d3.csv("data.csv", function(error, data) {
     data = data.filter(function(row) {
@@ -81,7 +79,7 @@ d3.csv("data.csv", function(error, data) {
   });
 
   x.domain(data.map(function(d) { return d.Q; }));
-  y.domain([d3.min(data, function(d) { return d.SurpriseVal; })]), d3.max(data, function(d) { return d.SurpriseVal; })]);
+  y.domain([d3.min(data, function(d) { return d.SurpriseVal; }), d3.max(data, function(d) { return d.SurpriseVal; })]);
     
     svg.append("g")
       .attr("class", "x axis")
@@ -106,8 +104,9 @@ d3.csv("data.csv", function(error, data) {
       //.attr("class", "bar")
       .attr("x", function(d) { return x(d.Q); })
       .attr("width", x.rangeBand())
-      .attr("y", function(d) { return x(Math.min(0, d.SurpriseVal)); })
-      //.attr("height", function(d) { return Math.abs(y(d.SurpriseVal) - y(0)); })
+      //.attr("y", function(d) { return x(Math.min(0, d.SurpriseVal)); })
+      .attr("y", function(d) { return y(d.SurpriseVal); })
+       //.attr("height", function(d) { return Math.abs(y(d.SurpriseVal) - y(0)); })
       .attr("height", function(d) { return height - y(d.SurpriseVal); });
 
   d3.select("input").on("change", change);
