@@ -52,7 +52,7 @@ var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1, 1);
 
 var y = d3.scale.linear()
-    .range([0, height]);
+    .range([height, 0]);
 
 var xAxis = d3.svg.axis()
     .scale(x)
@@ -82,7 +82,7 @@ d3.csv("data.csv", function(error, data) {
   });
 
   x.domain(data.map(function(d) { return d.Q; }));
-  y.domain([d3.min(data, function(d) { return d.SurpriseVal; }), d3.max(data, function(d) { return d.SurpriseVal; })]);
+  y..domain(d3.extent(data, function(d){return d.SurpriseVal;}));
 
   svg.append("g")
       .attr("class", "y axis")
