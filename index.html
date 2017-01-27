@@ -90,7 +90,7 @@ d3.csv("data.csv", function(error, data) {
 
   svg.append("g")
       .attr("class", "y axis")
-      .attr("transform", "translate(0," + x(0) + ")")
+      //.attr("transform", "translate(0," + x(0) + ")")
       .call(yAxis)
     .append("text")
       .attr("transform", "rotate(-90)")
@@ -107,8 +107,8 @@ d3.csv("data.csv", function(error, data) {
       .attr("x", function(d) { return x(d.Q); })
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return x(Math.min(0, d.SurpriseVal)); })
-      .attr("height", function(d) { return Math.abs(y(d.SurpriseVal) - y(0)); })
-      //.attr("height", function(d) { return height - y(d.SurpriseVal); });
+      //.attr("height", function(d) { return Math.abs(y(d.SurpriseVal) - y(0)); })
+      .attr("height", function(d) { return height - y(d.SurpriseVal); });
 
   d3.select("input").on("change", change);
 
