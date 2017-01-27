@@ -98,9 +98,8 @@ var menu = d3.select("#menu select")
 d3.csv("data.csv", function(data) {
   results = data;
 
-  var stocks = d3.keys(results[0]).filter(function(key) {
-    return key != "Symbol";
-  });
+  var n_data = d3.nest()
+  .key(function(d) { return d.Symbol;})
 
   results.forEach(function(d) {
     d.SurpriseVal = +d.SurpriseVal;
@@ -108,7 +107,7 @@ d3.csv("data.csv", function(data) {
 
 
   menu.selectAll("option")
-      .data(stocks)
+      .data(n_data.key)
     .enter().append("option")
       .text(function(d) { return d; });
 
