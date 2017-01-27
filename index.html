@@ -53,6 +53,8 @@ svg {
 <script src="//d3js.org/d3.v2.min.js" charset="utf-8"></script>
 <script>
 
+var splst = ['AGN', 'LIFE', 'EOG', 'CPB', 'YUM', 'JWN', 'TAP', 'BWA', 'WM', 'SPG', 'FIS', 'GT', 'GIS', 'MJN', 'ROP', 'GE', 'GD', 'VAR', 'AMZN', 'MAS', 'MAR', 'MAT', 'SNA', 'SNI', 'XRAY', 'JNJ', 'XYL', 'TSN', 'SYMC', 'BEN', 'CMI', 'DISCA', 'CMG', 'CME', 'CMA', 'CMS', 'DTV', 'VLO', 'HUM', 'APOL', 'LSI', 'PCLN', 'FSLR', 'HCP', 'IGT', 'K', 'FFIV', 'BLL', 'ORLY', 'BLK', 'FTI', 'HCN', 'NFX', 'MA', 'CBG', 'PRGO', 'MO', 'NOC', 'MU', 'CBS', 'NDAQ', 'SE', 'MS', 'TJX', 'NOV', 'AMGN', 'COST', 'FE', 'CTL', 'ADBE', 'DOV', 'DOW', 'MSFT', 'GLW', 'SCHW', 'BSX', 'FCX', 'UPS', 'WHR', 'BBBY', 'MDT', 'F', 'DFS', 'JEC', 'V', 'FMC', 'AVY', 'ALL', 'NTAP', 'LMT', 'MMM', 'SO', 'JNPR', 'MMC', 'WEC', 'DPS', 'IBM', 'BAX', 'CAT', 'CAH', 'BAC', 'GS', 'CAG', 'LM', 'LH', 'PGR', 'HIG', 'CELG', 'A', 'ABC', 'ZION', 'STI', 'STT', 'ABT', 'XOM', 'STX', 'STZ', 'BHI', 'CERN', 'RSG', 'PNW', 'IVZ', 'PNC', 'BXP', 'VFC', 'XLNX', 'JOY', 'RAI', 'PRU', 'RF', 'RL', 'URBN', 'CHK', 'L', 'HRS', 'HRL', 'MRO', 'MRK', 'HRB', 'IPG', 'RHT', 'RHI', 'APH', 'ROST', 'APC', 'APA', 'APD', 'SRE', 'KSS', 'WFM', 'WFC', 'IFF', 'NVDA', 'RTN', 'BMS', 'BMY', 'AFL', 'EL', 'PAYX', 'OXY', 'SHW', 'ED', 'EA', 'CSC', 'CSX', 'TMK', 'EW', 'LUV', 'MUR', 'ATI', 'WYN', 'JBL', 'ADSK', 'WPX', 'ECL', 'SEE', 'PVH', 'DGX', 'NUE', 'EXPE', 'EXPD', 'UNP', 'ETFC', 'DUK', 'CLF', 'R', 'CLX', 'DTE', 'BBY', 'UNH', 'BBT', 'TRIP', 'OMC', 'KO', 'VMC', 'KR', 'LNC', 'KEY', 'ITW', 'KLAC', 'DO', 'SWK', 'WYNN', 'SWN', 'DF', 'DG', 'DD', 'DE', 'TGT', 'HBAN', 'BIIB', 'PCG', 'AKAM', 'DHI', 'M', 'INTU', 'SLM', 'ALXN', 'DHR', 'SLB', 'MCO', 'MCK', 'MCD', 'NRG', 'PBCT', 'VTR', 'AXP', 'NFLX', 'EXC', 'AAPL', 'SJM', 'SRCL', 'WU', 'WY', 'VNO', 'UNM', 'SPLS', 'HST', 'HSY', 'CTSH', 'HAL', 'FITB', 'EQR', 'EQT', 'GPC', 'X', 'HAR', 'HAS', 'THC', 'CTXS', 'GPS', 'PHM', 'SYK', 'KIM', 'SYY', 'AEP', 'AES', 'AET', 'EMN', 'ESRX', 'AMAT', 'FTR', 'AEE', 'CTAS', 'EMR', 'FDX', 'CRM', 'TSO', 'PX', 'PG', 'PH', 'PM', 'EFX', 'C', 'S', 'QCOM', 'XRX', 'ANF', 'MOS', 'PSA', 'PSX', 'MON', 'MCHP', 'ETR', 'COP', 'DVN', 'KMB', 'DVA', 'KMI', 'GWW', 'FISV', 'COG', 'COF', 'COH', 'PEG', 'ETN', 'COL', 'BCR', 'KMX', 'DLTR', 'QEP', 'CI', 'HES', 'CB', 'CA', 'CF', 'WAT', 'CHRW', 'TDC', 'SBUX', 'PLD', 'CMCSA', 'FHN', 'MKC', 'GNW', 'CVX', 'AIZ', 'EIX', 'AIV', 'CVS', 'LOW', 'MSI', 'AIG', 'DIS', 'PPG', 'MNST', 'NSC', 'PPL', 'OKE', 'JCP', 'IP', 'HPQ', 'IR', 'MTB', 'UTX', 'JCI', 'PWR', 'CSCO', 'WDC', 'BA', 'BK', 'DRI', 'CCL', 'TIF', 'FLIR', 'MYL', 'LYB', 'D', 'PEP', 'WMT', 'VZ', 'T', 'WMB', 'VRSN', 'OI', 'CINF', 'NTRS', 'FLS', 'FLR', 'HD', 'LLY', 'ROK', 'INTC', 'SCG', 'AMD', 'NWL', 'AMP', 'TMO', 'AMT', 'LRCX', 'CNX', 'YHOO', 'PBI', 'BDX', 'TRV', 'MPC', 'AVP', 'MDLZ', 'AVB', 'NEM', 'FOSL', 'NEE', 'NI', 'NBR', 'RRC', 'FAST', 'NBL', 'TER', 'HP', 'LLTC', 'ADP', 'DNB', 'GILD', 'GME', 'RDC', 'DNR', 'JPM', 'ADM', 'ADI', 'VIAB', 'LEG', 'XEL', 'WIN', 'LEN', 'EBAY', 'MET', 'USB', 'AZO', 'PDCO', 'TWX', 'PCAR', 'TXN', 'CL', 'ORCL', 'TXT', 'PXD', 'HOG', 'PKI', 'CNP', 'HON', 'ICE', 'AN', 'ABBV', 'TROW', 'ISRG', 'PFE', 'NKE', 'PFG', 'TSS'];
+
 var margin = {top: 20, right: 40, bottom: 10, left: 40},
     width = 960,
     height = 250 - margin.top - margin.bottom;
@@ -92,15 +94,51 @@ svg.append("g")
     .attr("class", "domain")
     .attr("x2", width);
 
+var stocks;
+d3.csv("stocks.csv", function(countries) {
+  var ISO3 = {};
+  countries.forEach(function(d) {
+    ISO3[d.Symbol] = d[Symbol];
+  });
+  generateStockList(ISO3);
+});
+
+//create dropdown of countries
 var menu = d3.select("#menu select")
     .on("change", change);
 
+function generateStockList(stocks) {
+  for (var stock in stocks) {
+    var option=stockSel.append("option");
+      option.text(stock)
+      .attr("value", stocks[stock]);
+    
+    //set starting country
+    if (country=="AAPL") option.attr("selected",true);
+
+  }
+  change();
+}
+    
+    function generateStockList(splst) {
+  for (var stk in splst) {
+    var option=menu.append("option");
+      option.text(stk)
+      .attr("value", splst[stk]);
+    
+    //set starting country
+    if (stk=="AAPL") option.attr("selected",true);
+
+  }
+  load();
+}    
+    
 d3.csv("data.csv", function(data) {
   results = data;
 
   var n_data = d3.nest()
   .key(function(d) { return d.Symbol;})
-  .entries(results);
+  //.entries(results);
 
   data.forEach(function(d) {
     d.SurpriseVal = +d.SurpriseVal;
