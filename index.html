@@ -7,7 +7,7 @@ body {
   width: 1440px;
 }
 .axis text {
-  font: 2px sans-serif;
+  font: 10px sans-serif;
 }
 .axis path,
 .axis line {
@@ -70,8 +70,10 @@ d3.csv("data.csv", function(error, data) {
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis)
      .selectAll("text")
-      .attr("transform", "rotate(-90)")
-      .style("text-anchor", "end");
+      .style("text-anchor", "end")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em")
+      .attr("transform", "rotate(-65)" );
   svg.append("g")
       .attr("class", "y axis")
       //.attr("transform", "translate(0," + x(0) + ")")
@@ -115,7 +117,12 @@ d3.csv("data.csv", function(error, data) {
     transition.select(".x.axis")
         .call(xAxis)
       .selectAll("g")
-        .delay(delay);
+        .delay(delay)
+      .selectAll("text")
+       .style("text-anchor", "end")
+       .attr("dx", "-.8em")
+       .attr("dy", ".15em")
+       .attr("transform", "rotate(-65)" );
   }
 });
 </script>
