@@ -373,7 +373,8 @@ function createGraph(tick) {
         
 function load() {
     var e = document.getElementById("menu").firstChild;
-    createGraph(e.value);
+    var currTick = e.options[e.selectedIndex].text;
+    createGraph(currTick);
 }
 </script>
 </body>
