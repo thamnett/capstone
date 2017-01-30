@@ -373,10 +373,12 @@ function createGraph(tick) {
         
 function load() {
     var e = d3.select("#dd");
-    var currTick = e.text();
+    .on('change', function() {
+    var currTick = eval(d3.select(this).property('value'));
     d3.select("body").append("div")   
     .attr("value", currTick); 
     createGraph(currTick);
+    });
 }
 </script>
 </body>
