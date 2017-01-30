@@ -372,13 +372,15 @@ function createGraph(tick) {
     });
         
 function load() {
-    d3.select("#dd")
-    .on('change', function() {
-    var currTick = eval(d3.select(this).property('value'));
+    var e = d3.select("#dd");
+    var currTick = e.property("text");
+    //d3.select("#dd")
+    //.on('change', function() {
+    //var currTick = eval(d3.select(this).property('value'));
     d3.select("body").append("div")   
     .attr("value", currTick); 
     createGraph(currTick);
-    });
+    //});
 }
 </script>
 </body>
