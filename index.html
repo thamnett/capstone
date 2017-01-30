@@ -377,6 +377,9 @@ function load() {
     //d3.select("#dd")
     //.on('change', function() {
     //var currTick = eval(d3.select(this).property('value'));
+    d3.selectAll("svg > *").remove();
+    d3.selectAll("svg2 > *").remove();
+    d3.selectAll("svg3 > *").remove();
     d3.select("body").append("div")   
     .attr("value", currTick); 
     createGraph(currTick);
