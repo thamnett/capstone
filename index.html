@@ -39,6 +39,21 @@ border: 2px;
 border-radius: 8px;  
 pointer-events: none;                  
 }
+div2.tooltip {   
+position: absolute;     
+text-align: center;
+vertical-align: middle;   
+width: 150px;                  
+height: 150px;                 
+padding: 5px; 
+color: #000000;          
+font-size: 12px;     
+background: #FFF;
+box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+border: 2px;  
+border-radius: 8px;  
+pointer-events: none;                  
+}
 label {
   position: absolute;
   top: 10px;
@@ -107,6 +122,10 @@ var div = d3.select("body").append("div")
     .attr("class", "tooltip")               
     .style("opacity", 0);
 
+var div2 = d3.select("body").append("div")   
+    .attr("class", "tooltip")               
+    .style("opacity", 0);
+    
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -316,10 +335,10 @@ d3.csv("data.csv", function(error, data) {
              .style("opacity", 0.2)
              .style("stroke", "black")
  
-           var info3 = div
+           var info3 = div2
               .style("opacity", 1)
               .style("left", (d3.event.pageX+10) + "px")
-              .style("top", (d3.event.pageY-70) + "px")
+              .style("top", (d3.event.pageY-30) + "px")
               .text(d.Symbol);
               info3.append("p")
               .text(d.Sector);
