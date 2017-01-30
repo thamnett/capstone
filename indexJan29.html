@@ -61,15 +61,10 @@ var margin = {top: 20, right: 20, bottom: 100, left: 40},
 var formatPercent = d3.format(".2f");
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1, 1);
-var x2 = d3.scale.linear()
-    .range([width, 0]);
 var y = d3.scale.linear()
     .range([height, 0]);
 var xAxis = d3.svg.axis()
     .scale(x)
-    .orient("bottom");
-var xAxis2 = d3.svg.axis()
-    .scale(x2)
     .orient("bottom");
 var yAxis = d3.svg.axis()
     .scale(y)
@@ -105,14 +100,7 @@ function generateStockList(stocks) {
 var div = d3.select("body").append("div")   
     .attr("class", "tooltip")               
     .style("opacity", 0);
-
 var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
-var svg2 = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -125,12 +113,11 @@ d3.csv("data.csv", function(error, data) {
     
   data.forEach(function(d) {
     d.SurpriseVal = +d.SurpriseVal;
-    d.Intraday = +d.Intraday
   });
   x.domain(data.map(function(d) { return d.Q; }));
   y.domain([d3.min(data, function(d) { return d.SurpriseVal; }), d3.max(data, function(d) { return d.SurpriseVal; })]);
     
-  svg.append("g")
+    svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis)
@@ -209,59 +196,6 @@ d3.csv("data.csv", function(error, data) {
        .attr("dy", ".15em")
        .attr("transform", "rotate(-65)" );
   }
-  
-  x2.domain([d3.min(data, function(d) { return d.Intraday; }), d3.max(data, function(d) { return d.Intraday; })]);
-  y.domain([d3.min(data, function(d) { return d.SurpriseVal; }), d3.max(data, function(d) { return d.SurpriseVal; })]);
-    
-  svg2.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis2)
-     .selectAll("text")
-      .attr("transform", "rotate(-90)")
-      .attr("x", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("Intraday Return");
-  svg2.append("g")
-      .attr("class", "y axis")
-      //.attr("transform", "translate(0," + x(0) + ")")
-      .call(yAxis)
-    .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("EPS Surprise");
-  svg2.selectAll(".dot")
-      .data(data)
-    .enter().append("circle")
-      .attr("class", "dot")
-      .attr("r", 3.5)
-      .attr("cx", function(d) { return x(d.Intraday); })
-      .attr("cy", function(d) { return y(d.SurpriseVal); })
-      //.style("fill", function(d) { return color(d.species); });
-      //.attr("height", function(d) { return height - y(d.SurpriseVal); });
-        .on('mouseover', function(d){
-           d3.select(this)
-             .style("opacity", 0.2)
-             .style("stroke", "black")
- 
-           var info2 = div
-              .style("opacity", 1)
-              .style("left", (d3.event.pageX+10) + "px")
-              .style("top", (d3.event.pageY-30) + "px")
-              .text(formatPercent(d.Intraday));
-              info2.append("p")
-              .text(formatPercent(d.SurpriseVal));
-          })
-         .on('mouseout', function(d){
-            d3.select(this)
-          .style({'stroke-opacity':0.5,'stroke':'#a8a8a8'})
-          .style("opacity",1);
-          div
-              .style("opacity", 0);
-          });
 });
 function load() {
 }
