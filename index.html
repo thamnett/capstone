@@ -372,8 +372,8 @@ function createGraph(tick) {
     });
         
 function load() {
-    var newData = menu.option.text();
-    createGraph(newData);
+    var e = document.getElementById("menu");;
+    createGraph(e.value);
 }
 </script>
 </body>
