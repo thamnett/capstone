@@ -214,11 +214,11 @@ d3.csv("data.csv", function(error, data) {
   y.domain([d3.min(data, function(d) { return d.SurpriseVal; }), d3.max(data, function(d) { return d.SurpriseVal; })]);
     
   svg2.append("g")
-      .attr("class", "x axis")
+      .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis2)
      .selectAll("text")
-      .attr("transform", "rotate(-90)")
+      //.attr("transform", "rotate(-90)")
       .attr("x", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
