@@ -149,12 +149,13 @@ var cValue = function(d) { return d.Sector;},
     color = d3.scale.category20b();
 
    
-d3.csv("data.csv", function(error, data) {
-   data.forEach(function(d) {
+var data = d3.csv("data.csv", function(error, data) {
+    data.forEach(function(d) {
     d.SurpriseVal = +d.SurpriseVal;
     d.Intraday = +d.Intraday
   });
 });
+    
 function createGraph(tick) {
     initdata = data.filter(function(row) {
         return row['Symbol'] == tick;
@@ -367,8 +368,8 @@ function createGraph(tick) {
           });
     
 function load() {
-    var newData = menu.option.text
-    createGraph(newData)
+    var newData = menu.option.text();
+    createGraph(newData);
 }
 </script>
 </body>
