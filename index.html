@@ -44,7 +44,7 @@ position: absolute;
 text-align: center;
 vertical-align: middle;   
 width: 150px;                  
-height: 150px;                 
+height: 100px;                 
 padding: 5px; 
 color: #000000;          
 font-size: 12px;     
@@ -328,7 +328,7 @@ d3.csv("data.csv", function(error, data) {
       .style("text-anchor", "end")
       .text("EPS Surprise");
   svg3.selectAll(".dot")
-      .data(data)
+      .data(alldata)
     .enter().append("circle")
       .attr("class", "dot")
       .attr("r", 3.5)
