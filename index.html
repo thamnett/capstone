@@ -147,16 +147,13 @@ var svg3 = d3.select("body").append("svg")
   
 var cValue = function(d) { return d.Sector;},
     color = d3.scale.category20b();
-
-   
-var data = d3.csv("data.csv", function(error, data) {
+    
+function createGraph(tick) {
+    d3.csv("data.csv", function(error, data) {
     data.forEach(function(d) {
     d.SurpriseVal = +d.SurpriseVal;
     d.Intraday = +d.Intraday
   });
-});
-    
-function createGraph(tick) {
     initdata = data.filter(function(row) {
         return row['Symbol'] == tick;
     })
@@ -298,8 +295,14 @@ function createGraph(tick) {
           div
               .style("opacity", 0);
           });
+    });
 }
     
+    d3.csv("data.csv", function(error, data) {
+    data.forEach(function(d) {
+    d.SurpriseVal = +d.SurpriseVal;
+    d.Intraday = +d.Intraday
+  });
     alldata = data.filter(function(row) {
         if(row["SurpriseVal"] < 5 && row["SurpriseVal"] > -5)
         { 
@@ -366,7 +369,8 @@ function createGraph(tick) {
           div2
               .style("opacity", 0);
           });
-    
+    });
+        
 function load() {
     var newData = menu.option.text();
     createGraph(newData);
