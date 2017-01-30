@@ -39,7 +39,7 @@ border: 2px;
 border-radius: 8px;  
 pointer-events: none;                  
 }
-div2.tooltip {   
+div.tooltip#two {   
 position: absolute;     
 text-align: center;
 vertical-align: middle;   
@@ -123,7 +123,8 @@ var div = d3.select("body").append("div")
     .style("opacity", 0);
 
 var div2 = d3.select("body").append("div")   
-    .attr("class", "tooltip")               
+    .attr("class", "tooltip")
+    .attr("id", "two")
     .style("opacity", 0);
     
 var svg = d3.select("body").append("svg")
