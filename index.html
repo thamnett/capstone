@@ -156,6 +156,12 @@ d3.csv("data.csv", function(error, data) {
     initdata = data.filter(function(row) {
         return row['Symbol'] == 'AAPL';
     })
+    alldata = data.filter(function(row) {
+        if(row["SurprivaVal"] < .05) && (row["SurprivaVal"] > -.05)
+        { 
+            return row;
+        }
+    })
     
   
   x.domain(initdata.map(function(d) { return d.Q; }));
