@@ -308,7 +308,7 @@ d3.csv("data.csv", function(error, data) {
       .attr("r", 3.5)
       .attr("cx", function(d) { return x2(d.Intraday); })
       .attr("cy", function(d) { return y(d.SurpriseVal); })
-      .aatr("fill", function(d) { return color(cValue(d)); })
+      .attr("fill", function(d) { return color(cValue(d)); })
       //.style("fill", function(d) { return color(d.species); });
       //.attr("height", function(d) { return height - y(d.SurpriseVal); });
         .on('mouseover', function(d){
