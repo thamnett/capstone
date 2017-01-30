@@ -372,8 +372,8 @@ function createGraph(tick) {
     });
         
 function load() {
-    var e = document.getElementById("menu");
-    var currTick = e.options[e.selectedIndex].text;
+    var e = d3.select("#menu select");
+    var currTick = e.value;
     createGraph(currTick);
 }
 </script>
