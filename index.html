@@ -216,7 +216,7 @@ d3.csv("data.csv", function(error, data) {
     
   svg2.append("g")
       .attr("class", "axis")
-      .attr("transform", "translate(0," + height + ")")
+      .attr("transform", "translate(" + y(0) + ",0)"))
       .call(xAxis2)
      //.selectAll("text")
       //.attr("transform", "rotate(-90)")
@@ -228,7 +228,7 @@ d3.csv("data.csv", function(error, data) {
       .text("Intraday Return");
   svg2.append("g")
       .attr("class", "y axis")
-      //.attr("transform", "translate(0," + x(0) + ")")
+      .attr("transform", "translate(0," + x2(0) + ")")
       .call(yAxis)
     .append("text")
       .attr("transform", "rotate(-90)")
