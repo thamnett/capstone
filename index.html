@@ -161,7 +161,7 @@ function createGraph(tick) {
   x.domain(initdata.map(function(d) { return d.Q; }));
   y.domain([d3.min(initdata, function(d) { return d.SurpriseVal; }), d3.max(initdata, function(d) { return d.SurpriseVal; })]);
   
-  d3.selectAll("svg2 > *").remove();      
+  svg.selectAll("*").remove();      
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
@@ -241,7 +241,7 @@ function createGraph(tick) {
        .attr("dy", ".15em")
        .attr("transform", "rotate(-65)" );
   }
-  d3.selectAll("svg2 > *").remove();
+  svg2.selectAll("*").remove();;
   x2.domain([d3.min(initdata, function(d) { return d.Intraday; }), d3.max(initdata, function(d) { return d.Intraday; })]);
   y.domain([d3.min(initdata, function(d) { return d.SurpriseVal; }), d3.max(initdata, function(d) { return d.SurpriseVal; })]);
     
