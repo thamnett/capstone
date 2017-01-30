@@ -157,7 +157,7 @@ d3.csv("data.csv", function(error, data) {
         return row['Symbol'] == 'AAPL';
     })
     alldata = data.filter(function(row) {
-        if(row["SurprivaVal"] < .05 && row["SurprivaVal"] > -.05)
+        if(row["SurprivaVal"] < 5 && row["SurprivaVal"] > -5)
         { 
             return row;
         }
@@ -302,8 +302,8 @@ d3.csv("data.csv", function(error, data) {
               .style("opacity", 0);
           });
     
-  x2.domain([d3.min(data, function(d) { return d.Intraday; }), d3.max(data, function(d) { return d.Intraday; })]);
-  y.domain([d3.min(data, function(d) { return d.SurpriseVal; }), d3.max(data, function(d) { return d.SurpriseVal; })]);
+  x2.domain([d3.min(alldata, function(d) { return d.Intraday; }), d3.max(alldata, function(d) { return d.Intraday; })]);
+  y.domain([d3.min(alldata, function(d) { return d.SurpriseVal; }), d3.max(alldata, function(d) { return d.SurpriseVal; })]);
     
   svg3.append("g")
       .attr("class", "axis")
