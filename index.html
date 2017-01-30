@@ -147,23 +147,19 @@ var svg3 = d3.select("body").append("svg")
   
 var cValue = function(d) { return d.Sector;},
     color = d3.scale.category20b();
-    
+
+   
 d3.csv("data.csv", function(error, data) {
    data.forEach(function(d) {
     d.SurpriseVal = +d.SurpriseVal;
     d.Intraday = +d.Intraday
   });
+});
+function createGraph(tick) {
     initdata = data.filter(function(row) {
-        return row['Symbol'] == 'AAPL';
+        return row['Symbol'] == tick;
     })
-    alldata = data.filter(function(row) {
-        if(row["SurpriseVal"] < 5 && row["SurpriseVal"] > -5)
-        { 
-            return row;
-        }
-    })
-    
-  
+ 
   x.domain(initdata.map(function(d) { return d.Q; }));
   y.domain([d3.min(initdata, function(d) { return d.SurpriseVal; }), d3.max(initdata, function(d) { return d.SurpriseVal; })]);
     
@@ -301,6 +297,14 @@ d3.csv("data.csv", function(error, data) {
           div
               .style("opacity", 0);
           });
+}
+    
+    alldata = data.filter(function(row) {
+        if(row["SurpriseVal"] < 5 && row["SurpriseVal"] > -5)
+        { 
+            return row;
+        }
+    })
     
   x2.domain([d3.min(alldata, function(d) { return d.Intraday; }), d3.max(alldata, function(d) { return d.Intraday; })]);
   y.domain([d3.min(alldata, function(d) { return d.SurpriseVal; }), d3.max(alldata, function(d) { return d.SurpriseVal; })]);
@@ -361,8 +365,10 @@ d3.csv("data.csv", function(error, data) {
           div2
               .style("opacity", 0);
           });
-});
+    
 function load() {
+    var newData = menu.option.text
+    createGraph(newData)
 }
 </script>
 </body>
