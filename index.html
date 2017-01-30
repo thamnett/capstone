@@ -118,18 +118,22 @@ var svg2 = d3.select("body").append("svg")
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  
+var cValue = function(d) { return d.Sector;},
+    color = d3.scale.category20b();
     
 d3.csv("data.csv", function(error, data) {
-    data = data.filter(function(row) {
-        return row['Symbol'] == 'AAPL';
-    })
-    
-  data.forEach(function(d) {
+   data.forEach(function(d) {
     d.SurpriseVal = +d.SurpriseVal;
     d.Intraday = +d.Intraday
   });
-  x.domain(data.map(function(d) { return d.Q; }));
-  y.domain([d3.min(data, function(d) { return d.SurpriseVal; }), d3.max(data, function(d) { return d.SurpriseVal; })]);
+    initdata = data.filter(function(row) {
+        return row['Symbol'] == 'AAPL';
+    })
+    
+  
+  x.domain(initdata.map(function(d) { return d.Q; }));
+  y.domain([d3.min(initdata, function(d) { return d.SurpriseVal; }), d3.max(initdata, function(d) { return d.SurpriseVal; })]);
     
   svg.append("g")
       .attr("class", "x axis")
@@ -151,7 +155,7 @@ d3.csv("data.csv", function(error, data) {
       .style("text-anchor", "end")
       .text("EPS Surprise");
   svg.selectAll(".bar")
-      .data(data)
+      .data(initdata)
     .enter().append("rect")
       .attr("class", function(d) { return "bar bar--" + (d.SurpriseVal < 0 ? "negative" : "positive"); })
       //.attr("class", "bar")
@@ -211,6 +215,61 @@ d3.csv("data.csv", function(error, data) {
        .attr("transform", "rotate(-65)" );
   }
   
+  x2.domain([d3.min(initdata, function(d) { return d.Intraday; }), d3.max(initdata, function(d) { return d.Intraday; })]);
+  y.domain([d3.min(initdata, function(d) { return d.SurpriseVal; }), d3.max(initdata, function(d) { return d.SurpriseVal; })]);
+    
+  svg2.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0," + y(0) + ")")
+      .call(xAxis2)
+     //.selectAll("text")
+      //.attr("transform", "rotate(-90)")
+    .append("text")
+      .attr("class", "label")
+      .attr("x", width)
+      .attr("y", -6)
+      .style("text-anchor", "end")
+      .text("Intraday Return");
+  svg2.append("g")
+      .attr("class", "y axis")
+      .attr("transform", "translate(" + x2(0) + ",0)")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("EPS Surprise");
+  svg2.selectAll(".dot")
+      .data(initdata)
+    .enter().append("circle")
+      .attr("class", "dot")
+      .attr("r", 3.5)
+      .attr("cx", function(d) { return x2(d.Intraday); })
+      .attr("cy", function(d) { return y(d.SurpriseVal); })
+      //.style("fill", function(d) { return color(d.species); });
+      //.attr("height", function(d) { return height - y(d.SurpriseVal); });
+        .on('mouseover', function(d){
+           d3.select(this)
+             .style("opacity", 0.2)
+             .style("stroke", "black")
+ 
+           var info2 = div
+              .style("opacity", 1)
+              .style("left", (d3.event.pageX+10) + "px")
+              .style("top", (d3.event.pageY-30) + "px")
+              .text(formatPercent(d.Intraday));
+              info2.append("p")
+              .text(formatPercent(d.SurpriseVal));
+          })
+         .on('mouseout', function(d){
+            d3.select(this)
+          .style({'stroke-opacity':0.5,'stroke':'#a8a8a8'})
+          .style("opacity",1);
+          div
+              .style("opacity", 0);
+          });
+});
   x2.domain([d3.min(data, function(d) { return d.Intraday; }), d3.max(data, function(d) { return d.Intraday; })]);
   y.domain([d3.min(data, function(d) { return d.SurpriseVal; }), d3.max(data, function(d) { return d.SurpriseVal; })]);
     
@@ -243,6 +302,7 @@ d3.csv("data.csv", function(error, data) {
       .attr("r", 3.5)
       .attr("cx", function(d) { return x2(d.Intraday); })
       .attr("cy", function(d) { return y(d.SurpriseVal); })
+      .aatr("fill", function(d) { return color(cValue(d)); })
       //.style("fill", function(d) { return color(d.species); });
       //.attr("height", function(d) { return height - y(d.SurpriseVal); });
         .on('mouseover', function(d){
@@ -254,6 +314,10 @@ d3.csv("data.csv", function(error, data) {
               .style("opacity", 1)
               .style("left", (d3.event.pageX+10) + "px")
               .style("top", (d3.event.pageY-30) + "px")
+              .text(formatPercent(d.Symbol));
+              info2.append("p")
+              .text(formatPercent(d.Sector));
+              info2.append("p")
               .text(formatPercent(d.Intraday));
               info2.append("p")
               .text(formatPercent(d.SurpriseVal));
