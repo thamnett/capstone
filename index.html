@@ -118,6 +118,12 @@ var svg2 = d3.select("body").append("svg")
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var svg3 = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   
 var cValue = function(d) { return d.Sector;},
     color = d3.scale.category20b();
@@ -273,7 +279,7 @@ d3.csv("data.csv", function(error, data) {
   x2.domain([d3.min(data, function(d) { return d.Intraday; }), d3.max(data, function(d) { return d.Intraday; })]);
   y.domain([d3.min(data, function(d) { return d.SurpriseVal; }), d3.max(data, function(d) { return d.SurpriseVal; })]);
     
-  svg2.append("g")
+  svg3.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(0," + y(0) + ")")
       .call(xAxis2)
@@ -285,7 +291,7 @@ d3.csv("data.csv", function(error, data) {
       .attr("y", -6)
       .style("text-anchor", "end")
       .text("Intraday Return");
-  svg2.append("g")
+  svg3.append("g")
       .attr("class", "y axis")
       .attr("transform", "translate(" + x2(0) + ",0)")
       .call(yAxis)
@@ -295,7 +301,7 @@ d3.csv("data.csv", function(error, data) {
       .attr("dy", ".71em")
       .style("text-anchor", "end")
       .text("EPS Surprise");
-  svg2.selectAll(".dot")
+  svg3.selectAll(".dot")
       .data(data)
     .enter().append("circle")
       .attr("class", "dot")
@@ -310,16 +316,16 @@ d3.csv("data.csv", function(error, data) {
              .style("opacity", 0.2)
              .style("stroke", "black")
  
-           var info2 = div
+           var info3 = div
               .style("opacity", 1)
               .style("left", (d3.event.pageX+10) + "px")
               .style("top", (d3.event.pageY-30) + "px")
               .text(formatPercent(d.Symbol));
-              info2.append("p")
+              info3.append("p")
               .text(formatPercent(d.Sector));
-              info2.append("p")
+              info3.append("p")
               .text(formatPercent(d.Intraday));
-              info2.append("p")
+              info3.append("p")
               .text(formatPercent(d.SurpriseVal));
           })
          .on('mouseout', function(d){
