@@ -319,10 +319,10 @@ d3.csv("data.csv", function(error, data) {
            var info3 = div
               .style("opacity", 1)
               .style("left", (d3.event.pageX+10) + "px")
-              .style("top", (d3.event.pageY-30) + "px")
-              .text(formatPercent(d.Symbol));
+              .style("top", (d3.event.pageY-70) + "px")
+              .text(d.Symbol);
               info3.append("p")
-              .text(formatPercent(d.Sector));
+              .text(d.Sector);
               info3.append("p")
               .text(formatPercent(d.Intraday));
               info3.append("p")
