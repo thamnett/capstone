@@ -67,7 +67,7 @@ label {
 <body>
 <h1>Stock EPS Surprise</h1>
 <label><input type="checkbox"> Sort values</label>
-<p id="menu"><b>S&P500 Stocks</b><br>Stock: <select></select></p>
+<p id="menu"><b>S&P500 Stocks</b><br>Stock: <select id="dd"></select></p>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 var margin = {top: 20, right: 20, bottom: 100, left: 40},
@@ -372,7 +372,7 @@ function createGraph(tick) {
     });
         
 function load() {
-    var e = d3.select("#menu select");
+    var e = d3.select("#dd");
     var currTick = e.value;
     createGraph(currTick);
 }
