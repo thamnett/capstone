@@ -28,7 +28,7 @@ body {
 .x.axis path {
   display: none;
 }
-div.tooltip {   
+.tooltip#one {   
 position: absolute;     
 text-align: center;
 vertical-align: middle;   
@@ -43,7 +43,7 @@ border: 2px;
 border-radius: 8px;  
 pointer-events: none;                  
 }
-div.tooltip#two {   
+.tooltip#two {   
 position: absolute;     
 text-align: center;
 vertical-align: middle;   
@@ -113,7 +113,7 @@ function generateStockList(stocks) {
   for (var stock in stocks) {
     var option=menu.append("option");
       option.text(stock)
-      .attr("value", stocks[stock]);
+      option.attr("value", stocks[stock]);
     
     //set starting country
     if (stock=="AAPL") option.attr("selected",true);
@@ -123,7 +123,8 @@ function generateStockList(stocks) {
 }
     
 var div = d3.select("body").append("div")   
-    .attr("class", "tooltip")               
+    .attr("class", "tooltip")  
+    .attr("id", "one")
     .style("opacity", 0);
 
 var div2 = d3.select("body").append("div")   
@@ -134,6 +135,7 @@ var div2 = d3.select("body").append("div")
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+    .style("background-color", "#BE93C5")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
@@ -205,9 +207,9 @@ function createGraph(tick) {
               .style("opacity", 1)
               .style("left", (d3.event.pageX+10) + "px")
               .style("top", (d3.event.pageY-30) + "px")
-              .text(d.Q);
+              .text("Q: "+d.Q);
               info.append("p")
-              .text(formatPercent(d.SurpriseVal));
+              .text("Surprise: "+formatPercent(d.SurpriseVal));
           })
          .on('mouseout', function(d){
             d3.select(this)
