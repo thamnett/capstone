@@ -422,7 +422,7 @@ function createGraph(tick) {
        .data(color.domain())
      .enter().append("g")
        .attr("class", "legend")
-       .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+       .attr("transform", function(d, i) { return "translate(0," + i * 10 + ")"; });
 
     // draw legend colored rectangles
      legend.append("rect")
