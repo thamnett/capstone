@@ -76,9 +76,6 @@ label {
 </header>
 <body>
 <h1>Great Expectations</h1>
-<!--    
-<label><input type="checkbox"> Sort values</label>
--->
 <p id="menu"><b>S&P500 Stocks</b><br><select id="dd"></select></p>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
@@ -141,7 +138,6 @@ var div2 = d3.select("body").append("div")
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-    //.style("background-color", "#BE93C5")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
@@ -192,7 +188,7 @@ function createGraph(tick) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("EPS Surprise");
+      .text("EPS Surprise")
     .append("text")
         .attr("x", (width / 2))             
         .attr("y", 0 - (margin.top / 2))
