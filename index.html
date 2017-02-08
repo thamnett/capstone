@@ -9,7 +9,7 @@ body {
   font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   position: relative;
 }
-h1 {
+div#frst {
   background-image: url('http://voiceregistrar.com/wp-content/uploads/2016/07/9.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -85,7 +85,7 @@ label {
 <header>
 </header>
 <body>
-    <h1><br>Great Expectations<br><h2>An analysis of earnings expectations 1998-2013</h2></h1>
+    <div id="frst"><h1><br>Great Expectations<br><h2>An analysis of earnings expectations 1998-2013</h2></h1></div>
 <p id="menu"><b>S&P500 Stocks</b><br><select id="dd"></select></p>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
@@ -202,7 +202,7 @@ function createGraph(tick) {
       .text("EPS Surprise");
   svg.append("text")
         .attr("x", (width / 2))             
-        .attr("y", 0 - margin.top)
+        .attr("y", 0 + margin.top)
         .attr("text-anchor", "middle")  
         .style("font-size", "20px") 
         .style("font-weight", "bold")  
