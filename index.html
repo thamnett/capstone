@@ -84,7 +84,7 @@ label {
 <header>
 </header>
 <body>
-    <div id="frst"><h1>Great Expectations<br><h2>An analysis of earnings expectations 1998-2013</h2></h1></div>
+    <div id="frst"><h1><b>Great Expectations</b><br><h3>An analysis of earnings expectations 1998-2013</h3></h1></div>
 <p id="menu"><b>S&P500 Stocks</b><br><select id="dd"></select></p>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
@@ -296,7 +296,7 @@ function createGraph(tick) {
       .text("EPS Surprise");
    svg2.append("text")
         .attr("x", (width / 2))             
-        .attr("y", -2)
+        .attr("y", -10)
         .attr("text-anchor", "middle")  
         .style("font-size", "20px") 
         .style("font-weight", "bold")  
@@ -375,7 +375,7 @@ function createGraph(tick) {
       .text("EPS Surprise");
    svg3.append("text")
         .attr("x", (width / 2))             
-        .attr("y", -2)
+        .attr("y", -10)
         .attr("text-anchor", "middle")  
         .style("font-size", "20px") 
         .style("font-weight", "bold")  
@@ -425,19 +425,18 @@ function createGraph(tick) {
        .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
     // draw legend colored rectangles
-    legend.append("rect")
-      .attr("x", width - 10)
-      .attr("width", 10)
-      .attr("height", 10)
+     legend.append("rect")
+      .attr("x", width + 18)
+      .attr("width", 18)
+      .attr("height", 18)
       .style("fill", color);
 
-    // draw legend text
     legend.append("text")
-      .attr("x", width - 24)
+      .attr("x", width + 24)
       .attr("y", 9)
       .attr("dy", ".35em")
       .style("text-anchor", "end")
-      .text(function(d) { return d;})
+      .text(function(d) { return d; });
     });
         
 function load() {
