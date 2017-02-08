@@ -35,6 +35,10 @@ h1 {
 font-size: 12px;   
 font-weight: normal;
 }
+.legend {
+font-size: 10px;   
+font-weight: normal;
+}
 #tooltipone {   
 position: absolute;     
 text-align: center;
@@ -188,8 +192,8 @@ function createGraph(tick) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("EPS Surprise")
-    .append("text")
+      .text("EPS Surprise");
+  svg.append("text")
         .attr("x", (width / 2))             
         .attr("y", 0 - (margin.top / 2))
         .attr("text-anchor", "middle")  
@@ -218,6 +222,7 @@ function createGraph(tick) {
               .style("top", (d3.event.pageY-30) + "px")
               .text("Q: "+d.Q);
               info.append("p")
+              .attr("class","reg")
               .text("Surprise: "+formatPercent(d.SurpriseVal));
           })
          .on('mouseout', function(d){
