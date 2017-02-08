@@ -14,7 +14,6 @@ div#frst {
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
-  color: #4682B4;
   font: 20px;
 }
 h1#breaker {
@@ -85,7 +84,7 @@ label {
 <header>
 </header>
 <body>
-    <div id="frst"><h1><br>Great Expectations<br><h2>An analysis of earnings expectations 1998-2013</h2></h1></div>
+    <div id="frst"><h1>Great Expectations<br><h2>An analysis of earnings expectations 1998-2013</h2></h1></div>
 <p id="menu"><b>S&P500 Stocks</b><br><select id="dd"></select></p>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
@@ -202,7 +201,7 @@ function createGraph(tick) {
       .text("EPS Surprise");
   svg.append("text")
         .attr("x", (width / 2))             
-        .attr("y", 0 + margin.top)
+        .attr("y", 0)
         .attr("text-anchor", "middle")  
         .style("font-size", "20px") 
         .style("font-weight", "bold")  
@@ -268,16 +267,11 @@ function createGraph(tick) {
        .attr("dy", ".15em")
        .attr("transform", "rotate(-65)" );
   }*/
-  d3.select("body").append("h1")
-     .attr("id","breaker")
-     .text("EPS vs. Return: "+tick);
-        
+          
   svg2.selectAll("*").remove();;
   x2.domain([d3.min(initdata, function(d) { return d.Intraday; }), d3.max(initdata, function(d) { return d.Intraday; })]);
   y.domain([d3.min(initdata, function(d) { return d.SurpriseVal; }), d3.max(initdata, function(d) { return d.SurpriseVal; })]);
-  
-  
-        
+          
   svg2.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(0," + y(0) + ")")
@@ -304,7 +298,7 @@ function createGraph(tick) {
       .data(initdata)
     .enter().append("circle")
       .attr("class", "dot")
-      .attr("r", 100 * function(d) { return d.Volume/d3.max(initdata, function(d) { return d.Volume; }); })
+      .attr("r", function(d) { return 100*d.Volume/d3.max(initdata, function(d) { return d.Volume; }); })
       .attr("cx", function(d) { return x2(d.Intraday); })
       .attr("cy", function(d) { return y(d.SurpriseVal); })
       //.style("fill", function(d) { return color(d.species); });
@@ -348,9 +342,6 @@ function createGraph(tick) {
   x2.domain([d3.min(alldata, function(d) { return d.Intraday; }), d3.max(alldata, function(d) { return d.Intraday; })]);
   y.domain([d3.min(alldata, function(d) { return d.SurpriseVal; }), d3.max(alldata, function(d) { return d.SurpriseVal; })]);
   
-  d3.select("body").append("h1")
-     .attr("id","breaker")
-     .text("EPS vs. Return: All Stocks");      
         
   svg3.append("g")
       .attr("class", "axis")
