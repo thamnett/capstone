@@ -93,7 +93,7 @@ var margin = {top: 20, right: 20, bottom: 100, left: 40},
     height = 500 - margin.top - margin.bottom;
 var formatPercent = d3.format(".2f");
 var formatPerc = d3.format(",.1%");
-var formatComma = d3.format(",");    
+var formatComma = d3.format(",.0f");    
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1, 1);
 var x2 = d3.scale.linear()
