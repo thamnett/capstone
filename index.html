@@ -296,7 +296,7 @@ function createGraph(tick) {
       .text("EPS Surprise");
    svg2.append("text")
         .attr("x", (width / 2))             
-        .attr("y", -10)
+        .attr("y", -4)
         .attr("text-anchor", "middle")  
         .style("font-size", "20px") 
         .style("font-weight", "bold")  
@@ -375,7 +375,7 @@ function createGraph(tick) {
       .text("EPS Surprise");
    svg3.append("text")
         .attr("x", (width / 2))             
-        .attr("y", -10)
+        .attr("y", -4)
         .attr("text-anchor", "middle")  
         .style("font-size", "20px") 
         .style("font-weight", "bold")  
@@ -426,13 +426,13 @@ function createGraph(tick) {
 
     // draw legend colored rectangles
      legend.append("rect")
-      .attr("x", width + 18)
-      .attr("width", 18)
-      .attr("height", 18)
+      .attr("x", width - 18)
+      .attr("width", 5)
+      .attr("height", 5)
       .style("fill", color);
 
     legend.append("text")
-      .attr("x", width + 24)
+      .attr("x", width - 24)
       .attr("y", 9)
       .attr("dy", ".35em")
       .style("text-anchor", "end")
