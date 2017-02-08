@@ -28,7 +28,7 @@ body {
 .x.axis path {
   display: none;
 }
-.tooltip#one {   
+#tooltipone {   
 position: absolute;     
 text-align: center;
 vertical-align: middle;   
@@ -43,7 +43,7 @@ border: 2px;
 border-radius: 8px;  
 pointer-events: none;                  
 }
-.tooltip#two {   
+#tooltiptwo {   
 position: absolute;     
 text-align: center;
 vertical-align: middle;   
@@ -123,13 +123,11 @@ function generateStockList(stocks) {
 }
     
 var div = d3.select("body").append("div")   
-    .attr("class", "tooltip")  
-    .attr("id", "one")
+    .attr("id", "tooltipone")  
     .style("opacity", 0);
 
 var div2 = d3.select("body").append("div")   
-    .attr("class", "tooltip")
-    .attr("id", "two")
+    .attr("id", "tooltiptwo")
     .style("opacity", 0);
     
 var svg = d3.select("body").append("svg")
