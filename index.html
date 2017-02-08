@@ -10,7 +10,7 @@ body {
   position: relative;
 }
 h1 {
-  background-color: #7FDBFF;
+  background-color: #39CCCC;
   text-align: center;
 }
 .axis text {
@@ -72,13 +72,14 @@ label {
 }
 </style>
 <header>
-  <aside>Jan 27, 2017</aside>
-  <a>TMH</a>
+  <aside>Feb 8, 2017</aside>
 </header>
 <body>
-<h1>Stock EPS Surprise</h1>
+<h1>Great Expectations</h1>
+<!--    
 <label><input type="checkbox"> Sort values</label>
-<p id="menu"><b>S&P500 Stocks</b><br>Stock: <select id="dd"></select></p>
+-->
+<p id="menu"><b>S&P500 Stocks</b><br><select id="dd"></select></p>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 var margin = {top: 20, right: 20, bottom: 100, left: 40},
@@ -140,7 +141,7 @@ var div2 = d3.select("body").append("div")
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-    .style("background-color", "#BE93C5")
+    //.style("background-color", "#BE93C5")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
