@@ -10,6 +10,10 @@ body {
   position: relative;
   width: 1440px;
 }
+h1 {
+background-color: #7FDBFF;
+text-align: center;     
+}
 .axis text {
   font: 10px sans-serif;
 }
@@ -52,7 +56,7 @@ position: absolute;
 text-align: center;
 vertical-align: middle;   
 width: 150px;                  
-height: 100px;                 
+height: 120px;                 
 padding: 5px; 
 color: #000000;          
 font-size: 12px;     
@@ -293,9 +297,10 @@ function createGraph(tick) {
               .style("opacity", 1)
               .style("left", (d3.event.pageX+10) + "px")
               .style("top", (d3.event.pageY-30) + "px")
-              .text(formatPercent(d.Intraday));
+              .text("Return: "+formatPercent(d.Intraday));
               info2.append("p")
-              .text(formatPercent(d.SurpriseVal));
+              .attr("class","reg")
+              .text("Surprise: "+formatPercent(d.SurpriseVal));
           })
          .on('mouseout', function(d){
             d3.select(this)
@@ -363,16 +368,16 @@ function createGraph(tick) {
               .style("opacity", 1)
               .style("left", (d3.event.pageX+10) + "px")
               .style("top", (d3.event.pageY-30) + "px")
-              .text(d.Symbol);
+              .text("Symbol: "+d.Symbol);
               info3.append("p")
               .attr("class","reg")
               .text(d.Sector);
               info3.append("p")
               .attr("class","reg")
-              .text(formatPercent(d.Intraday));
+              .text("Return: "+formatPercent(d.Intraday));
               info3.append("p")
               .attr("class","reg")
-              .text(formatPercent(d.SurpriseVal));
+              .text("Surprise: "+formatPercent(d.SurpriseVal));
           })
          .on('mouseout', function(d){
             d3.select(this)
