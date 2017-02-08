@@ -10,7 +10,7 @@ body {
   position: relative;
 }
 h1 {
-  background-color: #39CCCC;
+  background-image: url('http://www.lightbearers.org/wp/wp-content/uploads/2016/08/great-expectations.jpg');
   text-align: center;
 }
 .axis text {
@@ -79,12 +79,12 @@ label {
   <aside>Feb 8, 2017</aside>
 </header>
 <body>
-<h1>Great Expectations</h1>
+<h1><br><br>An analysis of earnings expectations 1998-2013</h1>
 <p id="menu"><b>S&P500 Stocks</b><br><select id="dd"></select></p>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 var margin = {top: 20, right: 20, bottom: 100, left: 40},
-    width = 1440 - margin.left - margin.right,
+    width = 1170 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 var formatPercent = d3.format(".2f");
 var x = d3.scale.ordinal()
@@ -198,7 +198,7 @@ function createGraph(tick) {
         .attr("y", 0 - margin.top)
         .attr("text-anchor", "middle")  
         .style("font-size", "20px") 
-        //.style("text-decoration", "underline")  
+        .style("font-weight", "bold")  
         .text("EPS Surprise History: "+tick);
   svg.selectAll(".bar")
       .data(initdata)
