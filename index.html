@@ -92,6 +92,7 @@ var margin = {top: 20, right: 20, bottom: 100, left: 40},
     width = 1170 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 var formatPercent = d3.format(".2f");
+var formatPerc = d3.format(",.1%");
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1, 1);
 var x2 = d3.scale.linear()
@@ -103,7 +104,8 @@ var xAxis = d3.svg.axis()
     .orient("bottom");
 var xAxis2 = d3.svg.axis()
     .scale(x2)
-    .orient("bottom");
+    .orient("bottom")
+    .tick(formatPerc);;
     
 var yAxis = d3.svg.axis()
     .scale(y)
@@ -296,7 +298,7 @@ function createGraph(tick) {
       .text("EPS Surprise");
    svg2.append("text")
         .attr("x", (width / 2))             
-        .attr("y", -4)
+        .attr("y", -6)
         .attr("text-anchor", "middle")  
         .style("font-size", "20px") 
         .style("font-weight", "bold")  
@@ -316,14 +318,20 @@ function createGraph(tick) {
              .style("opacity", 0.2)
              .style("stroke", "black")
  
-           var info2 = div
+           var info2 = div2
               .style("opacity", 1)
               .style("left", (d3.event.pageX+10) + "px")
               .style("top", (d3.event.pageY-30) + "px")
-              .text("Return: "+formatPercent(d.Intraday));
+              .text("Return: "+formatPerc(d.Intraday));
               info2.append("p")
               .attr("class","reg")
-              .text("Surprise: "+formatPercent(d.SurpriseVal));
+              .text("Surprise: "+formatPercent(d.SurpriseVal))
+              info2.append("p")
+              .attr("class","reg")
+              .text("Q: "+d.Q)
+              info2.append("p")
+              .attr("class","reg")
+              .text("Volume: "+d.Volume);
           })
          .on('mouseout', function(d){
             d3.select(this)
@@ -375,7 +383,7 @@ function createGraph(tick) {
       .text("EPS Surprise");
    svg3.append("text")
         .attr("x", (width / 2))             
-        .attr("y", -4)
+        .attr("y", -6)
         .attr("text-anchor", "middle")  
         .style("font-size", "20px") 
         .style("font-weight", "bold")  
@@ -405,7 +413,7 @@ function createGraph(tick) {
               .text(d.Sector);
               info3.append("p")
               .attr("class","reg")
-              .text("Return: "+formatPercent(d.Intraday));
+              .text("Return: "+formatPerc(d.Intraday));
               info3.append("p")
               .attr("class","reg")
               .text("Surprise: "+formatPercent(d.SurpriseVal));
