@@ -28,6 +28,10 @@ body {
 .x.axis path {
   display: none;
 }
+.reg {
+font-size: 12px;   
+font-weight: normal;
+}
 #tooltipone {   
 position: absolute;     
 text-align: center;
@@ -361,10 +365,13 @@ function createGraph(tick) {
               .style("top", (d3.event.pageY-30) + "px")
               .text(d.Symbol);
               info3.append("p")
+              .attr("class","reg")
               .text(d.Sector);
               info3.append("p")
+              .attr("class","reg")
               .text(formatPercent(d.Intraday));
               info3.append("p")
+              .attr("class","reg")
               .text(formatPercent(d.SurpriseVal));
           })
          .on('mouseout', function(d){
